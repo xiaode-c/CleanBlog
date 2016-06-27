@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="style.css")}}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="logo"><a href="{{url_for("main.index")}}">NOTE</a></h1>
+            <nav>
+                <a class="nav-list-item" href="{{url_for("admin.admin_index")}}">统计</a>
+                <a class="nav-list-item" href="{{url_for("admin.admin_posts")}}">文章</a>
+                <a class="nav-list-item" href="{{url_for("admin.admin_categorys")}}">分类</a>
+                <a class="nav-list-item" href="{{url_for("admin.admin_comments")}}">评论</a>
+                <a class="nav-list-item" href="{{url_for("admin.admin_pages")}}">页面</a>
+                <br>
+                {% block nav %}
+                {% endblock %}
+            </nav>
+        </div>
+    {% block content %}
+    {% endblock %}
+
+    </div>
+</body>
+</html>

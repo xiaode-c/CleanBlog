@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="home"><a href="{{url_for("main.index")}}"><img src="{{url_for("static", filename="iconfont-huidaozhuye.png")}}" alt=""></a></div>
+<div class="post">
+    <div class="post-info">
+        <h1 class="title">{{post.title}}</h1>
+        <span class="detail">{{post.pub_date.date()}} - {{post.category.name}} - <a href="{{url_for("main.post", title=post.title)}}#comments">{{post.comments|length}}</a></span>
+    </div>
+    <p>
+        {{post.html_text|safe}}
+    </p>
+
+    <div class="post-comments">
+        <h2 id="comments">评论</h2>
+        {% for c in post.comments %}
+        {% if c.disabled == false%}
+            {% if current_user.is_authenticated %}
+                {% if c.disabled == True %}
+                        <a href="{{ url_for('admin.edit_comment', comment_id=c.id )}}"><input class="edit-button" type="button" value="打开"></a>  
+                {% else %}
+                        <a href="{{ url_for('admin.edit_comment', comment_id=c.id )}}"><input class="edit-button" type="button" value="禁用"></a>  
+                {% endif %}
+            {% endif %}
+
+            <div class="post-comment">
+                <div class="comment-info"><span class="comment-author">{{c.author_name}}</span> 评论于 <span class="comment-date">{{c.pub_date}}</span></div>
+                <div class="comment-content">
+                    <p>{{c.content}}</p>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+
+        <h2>添加评论</h2>
+        <div class="add-comment">
+            <form action="{{url_for('main.post', title=post.title)}}" method="post">
+                {{ form.hidden_tag() }}
+            {{form.author_name.label}} <br>
+            {{form.author_name(placeholder="昵称", required="required")}} <br>
+            {{form.email.label}}<br>
+            {{form.email(placeholder="邮箱", required="required")}}<br>
+            {{ form.content(placeholder=form.content.label.text, required="required", maxlength="1024") }} <br>
+            {{form.submit()}}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/solarized_dark.min.css">
+<script src="http://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "admin/layout.html" %}
+
+{% block nav %}
+    <li><a style="font-weight: bold;" href="{{url_for("admin.add_page")}}">添加页面</a></li>
+{% endblock %}
+
+{% block content %}
+        <div class="list">
+            {% for page in pages %}
+            <div>
+                <div class="date">
+                    {{page.pub_date}}
+                </div>
+                <div class="title">
+                    <a href="{{url_for("main.pages", title=page.title)}}">{{page.title}}</a>
+                    <a href="{{ url_for('admin.delete_page', page_id=page.id )}}"><input class="del-button" type="button" value="删除"></a>
+                    <a href="{{ url_for('admin.edit_page', page_id=page.id )}}"><input class="edit-button" type="button" value="编辑"></a>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+{% endblock %}

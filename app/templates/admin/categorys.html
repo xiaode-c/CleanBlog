@@ -1,0 +1,21 @@
+{% extends "admin/layout.html" %}
+
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+        <form id="add-category" action="{{url_for("admin.admin_categorys")}}" method="post">
+            <input type="text" placeholder="分类名" name="category_name" required="required" />
+            <button id="add-button">添加</button>
+        </form>
+        <div class="admin-categorys">
+            {% for category in categorys %}
+            <div class="category">
+                <a href="{{url_for("main.category", name=category.name)}}"><span class="category-name">{{category.name}}
+                <a href="{{ url_for('admin.delete_category', category_id=category.id )}}"><input class="del-button" type="button" value="删除"></a>
+                </span> <span class="posts-number">{{category.posts.count()}}</span></a>
+
+            </div>
+            {% endfor %}
+        </div>
+{% endblock %}

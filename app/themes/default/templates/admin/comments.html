@@ -1,0 +1,32 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+        <div class="list">
+            {% for comment in comments %}
+            <div class="admin-comment">
+                <div class="date">
+                    {{comment.pub_date}}
+                </div>
+                <div>
+                    <a href="{{ url_for('admin.delete_comment', comment_id=comment.id )}}"><input class="del-button" type="button" value="删除"></a>  
+                    {% if comment.disabled == True %}
+                    <a href="{{ url_for('admin.edit_comment', comment_id=comment.id )}}"><input class="edit-button" type="button" value="打开"></a>  
+                    {% else %}
+                    <a href="{{ url_for('admin.edit_comment', comment_id=comment.id )}}"><input class="edit-button" type="button" value="禁用"></a>  
+                    {% endif %}
+                    <div class="title">
+                        <a href="{{url_for("main.post", title=comment.post.title)}}">文章 {{comment.post.title}}</a>
+                    </div>
+                    <div class="author" >
+                        <p><span>作者</span>  {{comment.author_name}}</p>
+                    </div>
+                    <div>
+                        <p><span>内容</span>  {{comment.content|truncate(100)}}</p>
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+<div class="header">
+    <h1 id="logo"><a href="{{url_for("main.index")}}">NOTE</a></h1>
+    <nav>
+        <a class="nav-list-item" href="{{url_for("main.index")}}">首页</a>
+        <a class="nav-list-item" href="{{url_for("main.categorys")}}">分类</a>
+        <a class="nav-list-item" href="{{url_for("main.pages", title="关于" )}}">关于</a>
+        {% if current_user.is_authenticated %}
+        <a class="nav-list-item" href="{{url_for("admin.admin_index")}}">后台</a>
+        {% endif %}
+    </nav>
+</div>

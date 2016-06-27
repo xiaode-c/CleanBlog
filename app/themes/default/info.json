@@ -1,0 +1,9 @@
+{
+    "application": "blog",
+    "identifier": "default", 
+    "name": "default", 
+    "author": "xidode-c",
+    "description": "This is default theme",
+    "license": "MIT/X11",
+    "doctype": "html5"
+}
