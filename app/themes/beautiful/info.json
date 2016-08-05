@@ -1,9 +1,0 @@
-{
-    "application": "blog",
-    "identifier": "beautiful", 
-    "name": "beautiful theme", 
-    "author": "xidode-c",
-    "description": "This is a beautiful theme",
-    "license": "MIT/X11",
-    "doctype": "html5"
-}

@@ -18,7 +18,7 @@ class DevelopmentConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
                               'mysql://root:123456@localhost/person_blog'
-
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 class TestingConfig(Config):
     TESTING = True

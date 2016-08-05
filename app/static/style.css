@@ -3,8 +3,11 @@ div {
 }
 
 pre code {
-    font-family: "DejaVuSansMono","Bitter", "Georgia", "SimSun", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family:"DejaVuSansMono","Bitter", "Georgia", "SimSun", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    border: 2px solid #55BFD0;
+    border-radius: 5px;
 }
+
 
 .container {
     color: #3F3F3F;
@@ -362,3 +365,11 @@ margin-left: 100px;
     margin-bottom: 80px;
 }
 
+ @font-face {
+	font-family: 'DejaVuSansMono';
+	src: url('DejaVuSansMono-webfont.eot'); /* IE9 Compat Modes */
+	src: url('DejaVuSansMono-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('DejaVuSansMono-webfont.woff') format('woff'), /* Modern Browsers */
+             url('DejaVuSansMono-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('DejaVuSansMono-webfont.svg#DejaVuSansMono') format('svg'); /* Legacy iOS */
+   }

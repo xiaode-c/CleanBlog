@@ -1,5 +1,5 @@
 # coding:utf-8
-from flask.ext.script import Manager, Shell
+from flask_script import Manager, Shell
 from app import create_app, db
 from app.models import User, Category, Post, Comment, Page, Site, FriendLink
 from flask_migrate import Migrate, MigrateCommand, upgrade

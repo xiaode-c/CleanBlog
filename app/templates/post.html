@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+    {% block css %}
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.5.0/styles/tomorrow-night-bright.min.css">
+
+    {% endblock %}
 {% block content %}
 <div class="home"><a href="{{url_for("main.index")}}"><img src="{{url_for("static", filename="iconfont-huidaozhuye.png")}}" alt=""></a></div>
 <div class="post">
@@ -48,7 +52,7 @@
 </div>
 
 
-<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/solarized_dark.min.css">
-<script src="http://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.5.0/highlight.min.js"></script>
+{#<script src="http://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>#}
 <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 # from flask.ext.themes2 import Themes
 # from flask.ext.themes import setup_themes
 from config import config
