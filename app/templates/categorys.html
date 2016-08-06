@@ -1,12 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    {% include "_header.html" %}
-        <div class="categorys">
-            {% for category in categorys %}
-            <div class="category">
-                    <a href="{{url_for("main.category", name=category.name)}}"><span class="category-name">{{category.name}}</span> <span class="posts-number">{{category.posts.count()}}</span></a>
-            </div>
-            {% endfor %}
+
+<div class="categorys">
+    {% for category in categorys %}
+    <div class="category">
+        <h2>{{category.name}} <span style="font-size:14px; color:#aaa;"> 文章数：{{category.posts.count()}}</span></h2>
+        <p></p>
+        <div class="category-post">
+            <ul>
+                {% for post in category.posts.order_by('-pub_date') %}
+                <li><a class="cate-post-title" href="{{url_for("main.post", title=post.title)}}">{{post.title}}</a><span class="post-date">{{post.pub_date.date()}}</span></li>
+                {% endfor %}
+            </ul>
         </div>
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

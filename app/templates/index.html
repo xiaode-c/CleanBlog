@@ -1,17 +1,33 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    {% include "_header.html" %}
-        <div class="list">
-            {% for post in posts %}
-            <div>
-                <div class="date">
-                    {{post.pub_date}}
-                </div>
-                <div class="title">
-                    <a href="{{url_for("main.post", title=post.title)}}">{{post.title}}</a>
-                </div>
-            </div>
-            {% endfor %}
+
+<div class="post-list">
+    {% for post in posts %}
+    <article class="post">
+        
+        <h1 class="post-title">
+            <a href="{{url_for("main.post", title=post.title)}}">{{post.title}}</a>
+        </h1>
+        <div class="post-info">
+            <p>{{post.pub_date}} -- {{post.category.name}}</p>
         </div>
+        <div class="post-content">
+            {{ post.html_text|safe |striptags| truncate(150, True, "...")}}
+            
+        </div>
+        
+        <div class="post-detail">
+            <a href="{{url_for("main.post", title=post.title)}}">查看全文</a>
+        </div>
+    </article>
+    {% endfor %}
+
+</div>
+
+<div class="pagination">
+    <span class="left"><a href="#">上一页</a></span>
+    <span class="right"><a href="#">下一页</a></span>
+</div>
+
 {% endblock %}

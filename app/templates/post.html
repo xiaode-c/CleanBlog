@@ -1,22 +1,28 @@
 {% extends "layout.html" %}
 
+{% block content %}
+
     {% block css %}
 <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.5.0/styles/tomorrow-night-bright.min.css">
 
     {% endblock %}
-{% block content %}
-<div class="home"><a href="{{url_for("main.index")}}"><img src="{{url_for("static", filename="iconfont-huidaozhuye.png")}}" alt=""></a></div>
-<div class="post">
-    <div class="post-info">
-        <h1 class="title">{{post.title}}</h1>
-        <span class="detail">{{post.pub_date.date()}} - {{post.category.name}} - <a href="{{url_for("main.post", title=post.title)}}#comments">{{post.comments|length}}</a></span>
-    </div>
-    <p>
-        {{post.html_text|safe}}
-    </p>
 
-    <div class="post-comments">
-        <h2 id="comments">评论</h2>
+<article class="post">
+    
+    <h1 class="post-title">
+        <a href="">{{post.title}}</a>
+    </h1>
+    <div class="post-info">
+        <p>{{post.pub_date}} - {{post.category.name}}</p>
+    </div>
+    <div class="post-content">
+        {{ post.html_text|safe }}
+    </div>
+
+</article>
+
+<div class="post-comments">
+        <h4 id="comments">评论</h4>
         {% for c in post.comments %}
         {% if c.disabled == false%}
             {% if current_user.is_authenticated %}
@@ -36,21 +42,22 @@
         {% endif %}
         {% endfor %}
 
-        <h2>添加评论</h2>
+        <h4 id="add-comment">添加评论</h4>
         <div class="add-comment">
             <form action="{{url_for('main.post', title=post.title)}}" method="post">
                 {{ form.hidden_tag() }}
-            {{form.author_name.label}} <br>
-            {{form.author_name(placeholder="昵称", required="required")}} <br>
-            {{form.email.label}}<br>
-            {{form.email(placeholder="邮箱", required="required")}}<br>
-            {{ form.content(placeholder=form.content.label.text, required="required", maxlength="1024") }} <br>
-            {{form.submit()}}
+                {{form.author_name.label}} <br>
+                {{form.author_name(placeholder="昵称", required="required", class="form-control")}} <br>
+                {{form.email.label}}<br>
+                {{form.email(placeholder="邮箱", required="required", class="form-control")}}<br>
+                {{ form.content(placeholder=form.content.label.text, required="required", maxlength="400px",class="form-control") }} <br>
+                {{form.submit(class="btn btn-info")}}
             </form>
         </div>
-    </div>
-</div>
 
+
+
+    </div>
 
 <script src="//cdn.bootcss.com/highlight.js/9.5.0/highlight.min.js"></script>
 {#<script src="http://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>#}

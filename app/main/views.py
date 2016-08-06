@@ -1,9 +1,12 @@
 # coding:utf-8
 
+import time
 import datetime
 import markdown
+import collections
 from flask import Flask, render_template, request, redirect, url_for, flash, g, make_response
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func  
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from forms import AddCommentForm
 from .. import db
@@ -13,7 +16,7 @@ from ..models import User, Post, Category, Comment, Page
 
 @main.route('/')
 def index():
-    posts = Post.query.order_by("-pub_date").all()
+    posts = Post.query.order_by("-pub_date")
     return render_template("index.html", posts=posts, title=u"首页")
 
 
@@ -84,3 +87,16 @@ def sitemap():
     res = make_response(sitemap_xml)
     res.mimetype = 'application/xml'
     return res
+
+
+@main.route('/archives')
+def archives():
+    posts = Post.query.order_by("-pub_date")
+    results = collections.OrderedDict()
+    for i in posts:
+        year_month = i.pub_date.strftime("%Y-%m")
+        if year_month not in results:
+            results[year_month] = []
+        results[year_month].append(i)
+
+    return render_template("archives.html", archives=results)

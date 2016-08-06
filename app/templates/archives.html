@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% for archive in archives.keys() %}
+<div>
+    <h3>{{ archive}}</h3>
+    <ul>
+    {% for i in archives[archive] %}
+       <li><a href="{{url_for("main.post", title=i.title)}}">{{i.title}}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endfor  %}
+
+{% endblock %}

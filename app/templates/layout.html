@@ -1,23 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{title}}-笔记</title>
+    <title>NOTE</title>
     <meta name="keywords" content="python linux 前端 web 数据结构 算法">
     <meta name="description" content="记录自己的IT学习笔记，包含python,web,linux,数据结构与算法等">
     <meta name="author" content="gdb,1178717119@qq.com">
-    <link rel="stylesheet" href="{{url_for("static", filename="style.css")}}">
+    <!-- Bootstrap -->
+    <link href="{{url_for('static', filename='lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+     <link rel="stylesheet" href="{{url_for('static', filename='css/typo.css')}}">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     {% block css %}
     {% endblock %}
-</head>
-<body>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-        {% include "_footer.html" %}
+  </head>
+  <body>
+    <div class="sidebar-col">
+        <div class="logo">
+            <h2 class="site-title"><a href="{{url_for('main.index')}}">NOTE</a></h2>
+            <p class="subtitle">生活就是要折腾</p>
+        </div>
+        <nav>
+            <ul class="nav">
+                <li><a class="nav-item" href="{{url_for('main.index')}}">首页</a></li>
+                <li><a class="nav-item" href="{{url_for('main.categorys')}}">分类</a></li>
+                <li><a class="nav-item" href="{{url_for('main.archives')}}">归档</a></li>
+                <li><a class="nav-item" href="{{url_for('main.pages', title='about')}}">关于</a></li>
+            </ul>
+        </nav>
     </div>
+    <div class="content-col typo">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer id="footer">
+            <hr class="divider">
+            <p>© 2016 - NOTE - <a href="" target="_blank">备案号</a></p>
+            <p>Power by flask & mysql</p>
+        </footer>
+        
+    </div>
+    
 
-</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{url_for('static', filename='lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  </body>
 </html>

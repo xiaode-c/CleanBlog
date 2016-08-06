@@ -4,7 +4,7 @@ div {
 
 pre code {
     font-family:"DejaVuSansMono","Bitter", "Georgia", "SimSun", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-    border: 2px solid #55BFD0;
+    border: 2px solid cadetblue;
     border-radius: 5px;
 }
 
@@ -207,6 +207,10 @@ pre code {
 .category .posts-number {
     float: right;
     margin-right: 20px;
+}
+
+.category-post .cate-post-title {
+    font-size: 18px;
 }
 
 /*login page*/
