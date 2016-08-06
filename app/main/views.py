@@ -15,9 +15,11 @@ from ..models import User, Post, Category, Comment, Page
 
 
 @main.route('/')
-def index():
-    posts = Post.query.order_by("-pub_date")
-    return render_template("index.html", posts=posts, title=u"首页")
+@main.route('/index/<page>')
+def index(page=1):
+    pagination = Post.query.order_by("-pub_date").paginate(int(page), 10)
+    posts = pagination.items
+    return render_template("index.html", posts=posts, pagination=pagination, title=u"首页")
 
 
 @main.route('/categorys')

@@ -26,8 +26,12 @@
 </div>
 
 <div class="pagination">
-    <span class="left"><a href="#">上一页</a></span>
-    <span class="right"><a href="#">下一页</a></span>
+    {% if pagination.has_prev %}
+    <span class="left"><a href="{{url_for('main.index', page=pagination.page-1)}}">上一页</a></span>
+    {% endif %}
+    {% if pagination.has_next %}
+    <span class="right"><a href="{{url_for('main.index', page=pagination.page+1)}}">下一页</a></span>
+    {% endif %}
 </div>
 
 {% endblock %}
