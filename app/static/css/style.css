@@ -208,6 +208,7 @@ nav .nav .nav-item:focus {
     .content-col {
         margin-left: 0;
         width: 100%;
+        padding: 5px;
     }
 
     .content {
@@ -225,5 +226,9 @@ nav .nav .nav-item:focus {
 
     .add-comment {
         width: 100%;
+    }
+    .logo {
+        margin-top: 20px;
+        margin-bottom: 0px;
     }
 }

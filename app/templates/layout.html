@@ -25,7 +25,7 @@
   <body>
     <div class="sidebar-col">
         <div class="logo">
-            <h2 class="site-title"><a href="{{url_for('main.index')}}">NOTE</a></h2>
+            <h2 class="site-title"><a href="{{url_for('main.index')}}">{{SITESETTINGS.sitename}}</a></h2>
             <p class="subtitle">生活就是要折腾</p>
         </div>
         <nav>
@@ -44,7 +44,7 @@
         </div>
         <footer id="footer">
             <hr class="divider">
-            <p>© 2016 - NOTE - <a href="" target="_blank">备案号</a></p>
+            <p>© 2016 - NOTE - {{SITESETTINGS.copyright}}</p>
             <p>Power by flask & mysql</p>
         </footer>
         

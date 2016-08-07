@@ -11,8 +11,12 @@ from flask_login import LoginManager, login_required, logout_user, login_user, c
 from forms import AddCommentForm
 from .. import db
 from . import main
-from ..models import User, Post, Category, Comment, Page
+from ..models import User, Post, Category, Comment, Page, Site
 
+@main.context_processor
+def include_permission_class():
+    site_setings = Site.query.first()
+    return {'SITESETTINGS': site_setings}
 
 @main.route('/')
 @main.route('/index/<page>')
