@@ -93,7 +93,8 @@ def edit_post(post_id):
         post.category_id = form.category.data
         post.html_text = markdown.markdown(post.md_text, extensions=[
             'markdown.extensions.fenced_code',
-            'markdown.extensions.codehilite'])
+            'markdown.extensions.codehilite',
+            'markdown.extensions.tables'])
         db.session.add(post)
         db.session.commit()
         return redirect(url_for("admin.admin_posts"))
@@ -173,7 +174,8 @@ def edit_page(page_id):
         page.md_text = form.md_text.data
         page.html_text = markdown.markdown(page.md_text, extensions=[
             'markdown.extensions.fenced_code',
-            'markdown.extensions.codehilite'])
+            'markdown.extensions.codehilite',
+            'markdown.extensions.tables'])
         db.session.add(page)
         db.session.commit()
         return redirect(url_for("admin.admin_pages"))

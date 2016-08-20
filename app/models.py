@@ -20,7 +20,8 @@ class Page(db.Model):
         now = datetime.now()
         html_text = markdown.markdown(md_text, extensions=[ \
                                     'markdown.extensions.fenced_code', \
-                                    'markdown.extensions.codehilite'])
+                                    'markdown.extensions.codehilite',
+                                    'markdown.extensions.tables'])
         page = cls(title=title, md_text=md_text, html_text=html_text, pub_date=now)
         db.session.add(page)
         db.session.commit()

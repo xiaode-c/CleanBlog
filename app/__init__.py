@@ -23,6 +23,8 @@ def create_app(config_name='default'):
 
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
+
     # theme.init_themes(app, app_identifier="blog")
     # setup_themes(app)
 

@@ -8,6 +8,10 @@ app = create_app()
 manager = Manager(app)
 migrate = Migrate(app, db)
 
+@app.context_processor
+def include_permission_class():
+    site_setings = Site.query.first()
+    return {'SITESETTINGS': site_setings}
 
 def make_shell_context():
     return dict(app=app, db=db, Post=Post, User=User, Category=Category, \

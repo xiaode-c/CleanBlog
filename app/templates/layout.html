@@ -34,6 +34,11 @@
                 <li><a class="nav-item" href="{{url_for('main.categorys')}}">分类</a></li>
                 <li><a class="nav-item" href="{{url_for('main.archives')}}">归档</a></li>
                 <li><a class="nav-item" href="{{url_for('main.pages', title='关于')}}">关于</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a class="nav-item" href="{{url_for('admin.admin_index')}}">后台</a></li>
+                <li><a class="nav-item" href="{{url_for('auth.logout')}}">注销</a></li>
+                {% else %}
+                {% endif %}
             </ul>
         </nav>
     </div>
@@ -47,9 +52,9 @@
             <p>© 2016 - NOTE - {{SITESETTINGS.copyright}}</p>
             <p>Power by flask & mysql</p>
         </footer>
-        
+
     </div>
-    
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
