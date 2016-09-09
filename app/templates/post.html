@@ -1,14 +1,8 @@
-{% extends "layout.html" %}
-
-{% block content %}
-
-    {% block css %}
-<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.5.0/styles/tomorrow-night-bright.min.css">
-
-    {% endblock %}
+{% extends "layout.html" %} {% block content %} {% block css %}
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.5.0/styles/tomorrow-night-bright.min.css"> {% endblock %}
 
 <article class="post">
-    
+
     <h1 class="post-title">
         <a href="">{{post.title}}</a>
     </h1>
@@ -18,48 +12,58 @@
     <div class="post-content">
         {{ post.html_text|safe }}
     </div>
-
 </article>
 
-<div class="post-comments">
-        <h4 id="comments">评论</h4>
-        {% for c in post.comments %}
-        {% if c.disabled == false%}
-            {% if current_user.is_authenticated %}
-                {% if c.disabled == True %}
-                        <a href="{{ url_for('admin.edit_comment', comment_id=c.id )}}"><input class="edit-button" type="button" value="打开"></a>  
-                {% else %}
-                        <a href="{{ url_for('admin.edit_comment', comment_id=c.id )}}"><input class="edit-button" type="button" value="禁用"></a>  
-                {% endif %}
-            {% endif %}
+<div>
+    {% if config['DUOSHUO_SHORT_NAME'] %}
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="{{post.id}}" data-title="{{post.title}}" data-url="{{url_for('main.post', title=post.title, _external=True)}}"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {
+            short_name: "{{config['DUOSHUO_SHORT_NAME']}}"
+        };
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] ||
+                document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    {% else %}
 
-            <div class="post-comment">
-                <div class="comment-info"><span class="comment-author">{{c.author_name}}</span> 评论于 <span class="comment-date">{{c.pub_date}}</span></div>
-                <div class="comment-content">
-                    <p>{{c.content}}</p>
-                </div>
-            </div>
-        {% endif %}
-        {% endfor %}
+    <h4 id="comments">评论</h4>
+    {% for c in post.comments %} {% if c.disabled == false%} {% if current_user.is_authenticated %} {% if c.disabled == True %}
+    <a href="{{ url_for('admin.edit_comment', comment_id=c.id )}}"><input class="edit-button" type="button" value="打开"></a>
+    {% else %}
+    <a href="{{ url_for('admin.edit_comment', comment_id=c.id )}}"><input class="edit-button" type="button" value="禁用"></a>
+    {% endif %} {% endif %}
 
-        <h4 id="add-comment">添加评论</h4>
-        <div class="add-comment">
-            <form action="{{url_for('main.post', title=post.title)}}" method="post">
-                {{ form.hidden_tag() }}
-                {{form.author_name.label}} <br>
-                {{form.author_name(placeholder="昵称", required="required", class="form-control")}} <br>
-                {{form.email.label}}<br>
-                {{form.email(placeholder="邮箱", required="required", class="form-control")}}<br>
-                {{ form.content(placeholder=form.content.label.text, required="required", maxlength="400px",class="form-control") }} <br>
-                {{form.submit(class="btn btn-info")}}
-            </form>
+    <div class="post-comment">
+        <div class="comment-info"><span class="comment-author">{{c.author_name}}</span> 评论于 <span class="comment-date">{{c.pub_date}}</span></div>
+        <div class="comment-content">
+            <p>{{c.content}}</p>
         </div>
-
-
-
     </div>
+    {% endif %} {% endfor %}
+
+    <h4 id="add-comment">添加评论</h4>
+    <div class="add-comment">
+        <form action="{{url_for('main.post', title=post.title)}}" method="post">
+            {{ form.hidden_tag() }} {{form.author_name.label}} <br> {{form.author_name(placeholder="昵称", required="required", class="form-control")}} <br> {{form.email.label}}
+            <br> {{form.email(placeholder="邮箱", required="required", class="form-control")}}<br> {{ form.content(placeholder=form.content.label.text, required="required", maxlength="400px",class="form-control") }} <br> {{form.submit(class="btn btn-info")}}
+        </form>
+    </div>
+    {% endif %}
+</div>
 
 <script src="//cdn.bootcss.com/highlight.js/9.5.0/highlight.min.js"></script>
-{#<script src="http://cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>#}
-<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
 {% endblock %}

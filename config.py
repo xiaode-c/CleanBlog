@@ -14,11 +14,13 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    DEBUG = True
-
+    # DEBUG = True
+    DUOSUO_SHORT_NAME = os.environ.get('DUOSHUO_SHORT_NAME')　　# 多说评论设置，如果不设置，默认是自带的评论
+    CNZZ_CONFIG = True  # 这里是设置CNZZ统计，可以关闭，或者在layout.html中设置
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
                               'mysql://root:123456@localhost/person_blog'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+
 
 class TestingConfig(Config):
     TESTING = True

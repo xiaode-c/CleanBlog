@@ -4,7 +4,7 @@ import time
 import datetime
 import markdown
 import collections
-from flask import Flask, render_template, request, redirect, url_for, flash, g, make_response
+from flask import Flask, render_template, request, redirect, url_for, flash, g, make_response, current_app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
